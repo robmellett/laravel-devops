@@ -1,6 +1,6 @@
 {
     "name": "robmellett/devops",
-    "description": "Add docker and gitlab config files",
+    "description": "Add docker and gitlab config files to speed up development",
     "keywords": [
         "robmellett",
         "devops"

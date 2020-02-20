@@ -1,0 +1,78 @@
+# Setup
+# Find and Replace 'acme' with the project name
+# Make sure the volumes are not mapped to './app'
+# 
+
+version: '3'
+services:
+  acme-app:
+    image: robmellett/lemp:7.4
+    hostname: acme-app
+    container_name: acme-app
+    dns: 8.8.8.8
+    env_file:
+      - .docker.env
+    environment:
+      CONTAINER_ROLE: app # [app, horizon, queue, scheduler]
+      APP_ENV: local # [local, staging, production]
+    volumes:
+      - ../app:/var/www/html
+    networks:
+      - acme
+    ports:
+      - 7000:80 # Web
+      - 443:443 # Https
+      - 7090:9100 # Prometheus, node_exporter
+    tty: true
+  
+  acme-queue:
+    image: robmellett/lemp:7.4
+    hostname: acme-queue
+    container_name: acme-queue
+    dns: 8.8.8.8
+    env_file:
+      - .docker.env
+    environment:
+      CONTAINER_ROLE: queue # [app, queue, scheduler]
+      APP_ENV: local # [local, staging, production]
+    volumes:
+      - ./app:/var/www/html
+    networks:
+      - acme
+    tty: true
+
+  acme-redis:
+    image: redis:latest
+    hostname: acme-redis
+    container_name: acme-redis
+    volumes:
+      - acme-redis-data:/data
+    networks:
+      - acme
+    ports:
+      - 6379:6379
+
+  acme-mysql:
+    image: mysql:latest
+    hostname: acme-mysql
+    container_name: acme-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - acme
+    ports:
+      - 3306:3306
+    volumes:
+      - acme-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=laravel
+      - MYSQL_USER=laravel
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root
+
+volumes:
+  acme-db-data:
+  acme-redis-data:
+
+networks:
+  acme:
+    driver: bridge

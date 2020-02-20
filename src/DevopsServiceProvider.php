@@ -21,8 +21,12 @@ class DevopsServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('devops.php'),
-            ], 'config');
+                __DIR__.'/stubs' => base_path(),
+            ], '');
+
+            // $this->publishes([
+            //     __DIR__.'/../config/config.php' => config_path('devops.php'),
+            // ], 'config');
 
             // Publishing the views.
             /*$this->publishes([
@@ -50,11 +54,11 @@ class DevopsServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'devops');
+        // $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'devops');
 
-        // Register the main class to use with the facade
-        $this->app->singleton('devops', function () {
-            return new Devops;
-        });
+        // // Register the main class to use with the facade
+        // $this->app->singleton('devops', function () {
+        //     return new Devops;
+        // });
     }
 }

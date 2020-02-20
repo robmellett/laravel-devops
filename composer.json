@@ -1,6 +1,6 @@
 {
     "name": "robmellett/devops",
-    "description": "Download common docker and gitlab config files",
+    "description": "Add docker and gitlab config files",
     "keywords": [
         "robmellett",
         "devops"

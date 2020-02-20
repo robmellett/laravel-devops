@@ -1,0 +1,54 @@
+{
+    "name": "robmellett/devops",
+    "description": "Download common docker and gitlab config files",
+    "keywords": [
+        "robmellett",
+        "devops"
+    ],
+    "homepage": "https://github.com/robmellett/devops",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Rob Mellett",
+            "email": "dev@robmellett.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Robmellett\\Devops\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Robmellett\\Devops\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Robmellett\\Devops\\DevopsServiceProvider"
+            ],
+            "aliases": {
+                "Devops": "Robmellett\\Devops\\DevopsFacade"
+            }
+        }
+    }
+}

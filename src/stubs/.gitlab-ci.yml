@@ -18,5 +18,5 @@ deploy_production:
     - yarn install
     - yarn production
     - vendor/bin/phpunit
-    - rsync -rlD --progress -e ssh '.' $USER@$SERVER:/var/www/$PROJECT --exclude=".env" --exclude=".git"
+    - rsync -rlD --progress --delete -e ssh '.' $USER@$SERVER:/var/www/$PROJECT --exclude=".env" --exclude=".git"
     - ssh $USER@$SERVER "cd /var/www/$PROJECT && php artisan migrate --force"

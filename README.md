@@ -1,3 +1,7 @@
+# Update Stubs with:
+`./build/update-stubs.sh`
+
+
 # Add docker and gitlab config files to speed up development
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/robmellett/devops.svg?style=flat-square)](https://packagist.org/packages/robmellett/devops)

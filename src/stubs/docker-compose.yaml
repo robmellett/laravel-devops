@@ -59,9 +59,9 @@ services:
     networks:
       - acme
     ports:
-      - 3306:3306
+      - 5432:5432
     volumes:
-      - acme-db-data:/var/lib/mysql
+      - acme-db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=laravel
       - POSTGRES_USER=laravel

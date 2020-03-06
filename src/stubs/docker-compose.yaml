@@ -16,6 +16,8 @@ services:
       APP_ENV: local # [local, staging, production]
     volumes:
       - ./:/var/www/html
+      - ~/.mkcert/docker-selfsigned.pem:/etc/nginx/ssl/nginx-selfsigned.crt # Override default SSL Cert
+      - ~/.mkcert/docker-selfsigned-key.pem:/etc/nginx/ssl/nginx-selfsigned.key # Override default SSL keys
     networks:
       - acme
     ports:

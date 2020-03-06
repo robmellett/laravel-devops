@@ -1,4 +1,4 @@
-image: robmellett/lemp:7.3
+image: robmellett/lemp:7.4
 
 before_script:
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'

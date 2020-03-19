@@ -9,7 +9,7 @@
 You can install the package via composer:
 
 ```bash
-composer require robmellett/devops
+composer require robmellett/devops --dev
 ```
 
 ## Usage

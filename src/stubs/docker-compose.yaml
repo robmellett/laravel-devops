@@ -1,6 +1,7 @@
 # Setup
 # Find and Replace 'acme' with the project name
-#
+# Make sure the volumes are not mapped to './app'
+# 
 
 version: '3.1'
 services:
@@ -15,17 +16,17 @@ services:
       CONTAINER_ROLE: app # [app, horizon, queue, scheduler]
       APP_ENV: local # [local, staging, production]
     volumes:
-      - ./:/var/www/html
+      - ../app:/var/www/html
       - ~/.mkcert/docker-selfsigned.pem:/etc/nginx/ssl/nginx-selfsigned.crt # Override default SSL Cert
       - ~/.mkcert/docker-selfsigned-key.pem:/etc/nginx/ssl/nginx-selfsigned.key # Override default SSL keys
     networks:
       - acme
     ports:
-      #- 7000:80 # Web
+      #- 7000:80 # Web # Enable HTTP
       - 7000:443 # Https
       - 7090:9100 # Prometheus, node_exporter
     tty: true
-
+  
   acme-queue:
     image: robmellett/lemp:7.4
     hostname: acme-queue
@@ -37,7 +38,7 @@ services:
       CONTAINER_ROLE: queue # [app, queue, scheduler]
       APP_ENV: local # [local, staging, production]
     volumes:
-      - ./:/var/www/html
+      - ./app:/var/www/html
     networks:
       - acme
     tty: true
